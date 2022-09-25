@@ -1,5 +1,5 @@
 import {GameStateManager} from './GameState/GameStateManager';
-import {TestState} from './GameState/states/TestState';
+import { MainState } from './GameState/states/MainState';
 import { Gui } from './gui/Gui';
 
 export class GameView {
@@ -36,7 +36,7 @@ export class GameView {
 
 	public start() {
 		this.clear;
-		this.gsm.pushState(new TestState(this.gsm));
+		this.gsm.pushState(new MainState(this.gsm));
 		this.loop();
 	}
 

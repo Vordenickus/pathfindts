@@ -1,9 +1,8 @@
 import { GameState } from "../GameState";
 import { GameStateManager } from "../GameStateManager";
 import { GameArea } from "../../GameArea/GameArea";
-import { Gui } from "~/gui/Gui";
 
-export class TestState extends GameState {
+export class MainState extends GameState {
 
 	private gameArea: GameArea;
 
