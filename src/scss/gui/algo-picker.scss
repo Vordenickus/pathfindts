@@ -1,0 +1,47 @@
+$block-name: 'b-algorithm-picker';
+
+.#{$block-name} {
+	display: flex;
+	flex-flow: column nowrap;
+
+	&__title {
+		text-align: center;
+		font-size: 40px;
+	}
+
+	&__grid {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		row-gap: 10px;
+		column-gap: 10px;
+	}
+
+	&__cell {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100px;
+		height: 50px;
+		box-sizing: border-box;
+		border-radius: 20px;
+		cursor: pointer;
+
+		&--bfs {
+			background-color: #fff;
+			color: #000;
+		}
+
+		&:hover {
+			border: 3px solid blue;
+		}
+
+		&--active {
+			border: 3px solid red;
+
+			&:hover {
+				border: 3px solid red;
+			}
+		}
+	}
+}

@@ -4,6 +4,8 @@ import './scss/main.scss';
 import './scss/gui/gui.scss';
 import './scss/gui/type-picker.scss';
 import './scss/gui/clear.scss';
+import './scss/gui/start.scss';
+import './scss/gui/algo-picker.scss';
 
 document.addEventListener("DOMContentLoaded", () => {
 	const view = new GameView('canvas');

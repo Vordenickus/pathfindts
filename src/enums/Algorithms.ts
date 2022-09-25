@@ -1,3 +1,3 @@
-export enum Algorythms {
+export enum Algorithms {
 	BFS
 }

@@ -76,6 +76,12 @@ export class GameArea {
 				break;
 		}
 		this.gameArea[yIndex][xIndex].type = type;
+		const event = new CustomEvent('areachanged', {
+			detail: {
+				isReady: this.isStartSet() && this.isTargetSet(),
+			}
+		});
+		window.dispatchEvent(event);
 	}
 
 
@@ -100,5 +106,10 @@ export class GameArea {
 			}
 		}
 		return false;
+	}
+
+
+	public getArea(): Cell[][] {
+		return this.gameArea;
 	}
 }
