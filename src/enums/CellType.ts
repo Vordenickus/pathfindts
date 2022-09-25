@@ -1,3 +1,3 @@
 export enum CellType {
-	START, TARGET, WALL, EARTH
+	START, TARGET, WALL, EARTH, STONE, SAND, WATER
 }

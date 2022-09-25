@@ -1,3 +1,3 @@
 export enum Algorithms {
-	BFS
+	BFS, ASTAR
 }

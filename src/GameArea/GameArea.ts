@@ -15,7 +15,7 @@ export class GameArea {
 
 	private width: number;
 
-	private static WIDTH = 10;
+	private static WIDTH = 20;
 
 	public constructor(width: number) {
 		this.gameArea = this.initGameArea(width);
@@ -66,8 +66,8 @@ export class GameArea {
 	public mouseOver(event: MouseEvent) {
 		const x = event.offsetX;
 		const y  = event.offsetY;
-		const indexX = Math.floor(x / 10);
-		const indexY = Math.floor(y / 10);
+		const indexX = Math.floor(x / GameArea.WIDTH);
+		const indexY = Math.floor(y / GameArea.WIDTH);
 
 		if (event.buttons === 1 || event.type === 'click') {
 			this.changeType(indexX, indexY, this.currentType);

@@ -3,9 +3,8 @@ import {CellType} from '../enums/CellType'
 export class Cell {
 	private x: number;
 	private y: number;
-	private static WIDTH = 10 as number;
-	private static HEIGHT = 10 as number;
-	private static BORDER = 1 as number;
+	private static WIDTH = 20 as number;
+	private static HEIGHT = 20 as number;
 
 	public type: CellType;
 

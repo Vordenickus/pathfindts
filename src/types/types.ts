@@ -7,3 +7,9 @@ export interface TypeEvent extends Event {
 export interface TypeEventDetail {
 	type: CellType;
 }
+
+export interface VirtualCell {
+	x: number,
+	y: number,
+	visited: boolean
+}
