@@ -32,6 +32,11 @@ $block-name: 'b-algorithm-picker';
 			color: #000;
 		}
 
+		&--astar {
+			background-color: #008000;
+			color: #000;
+		}
+
 		&:hover {
 			border: 3px solid blue;
 		}

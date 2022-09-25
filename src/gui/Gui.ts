@@ -100,6 +100,8 @@ export class Gui {
 
 	private calculateCurrentAlgo(id: string):Algorithms {
 		switch(id) {
+			case 'ap-astar':
+				return Algorithms.ASTAR;
 			case 'ap-bfs':
 			default:
 				return Algorithms.BFS;

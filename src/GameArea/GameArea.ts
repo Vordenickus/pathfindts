@@ -1,6 +1,8 @@
-import { CellNode } from "~/Objects/CellNode";
+import { Algorithms } from "../enums/Algorithms";
+import { CellNode } from "../Objects/CellNode";
 import { Algorythm } from "../Algorithms/Algorythm";
 import { BFS } from "../Algorithms/BFS";
+import { AStar } from "../Algorithms/AStar";
 import { CellType } from "../enums/CellType";
 import { Cell } from "./Cell";
 
@@ -27,7 +29,7 @@ export class GameArea {
 			this.clearGameArea();
 		}) as EventListener);
 		window.addEventListener('startinited', ((e: CustomEvent) => {
-			this.algorithm = new BFS(this.gameArea);
+			this.algorithm = this.pickAlgorythm(e.detail.algorithmName);
 			this.started = true;
 		}) as EventListener);
 	}
@@ -156,6 +158,21 @@ export class GameArea {
 			}
 		}
 		return false;
+	}
+
+
+	private pickAlgorythm(name: Algorithms): Algorythm {
+		let algo: Algorythm;
+		switch(name) {
+			case Algorithms.ASTAR:
+				algo = new AStar(this.gameArea);
+				break;
+			case Algorithms.BFS:
+			default:
+				algo = new BFS(this.gameArea);
+				break;
+		}
+		return algo;
 	}
 
 

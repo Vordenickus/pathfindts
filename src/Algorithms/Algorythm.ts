@@ -1,7 +1,7 @@
 import { CellNode } from '../Objects/CellNode';
 import { CellType } from '../enums/CellType';
 import { Cell } from '../GameArea/Cell';
-import { VirtualCell } from '~/types/types';
+import { VirtualCell } from '../types/types';
 
 export abstract class Algorythm {
 

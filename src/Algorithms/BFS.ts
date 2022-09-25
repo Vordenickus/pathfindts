@@ -2,7 +2,6 @@ import { Algorythm } from "./Algorythm";
 import { Algorithms } from "../enums/Algorithms";
 import { Cell } from "../GameArea/Cell";
 import { CellNode } from "../Objects/CellNode";
-import { VirtualCell } from "~/types/types";
 
 export class BFS extends Algorythm {
 

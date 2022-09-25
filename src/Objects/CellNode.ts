@@ -13,7 +13,7 @@ export class CellNode {
 
 	public constructor(x:number, y:number, parent:CellNode|null);
 	public constructor(x:number, y:number, parent:CellNode|null, value:number);
-	public constructor(x:number, y:number, parent:CellNode|null, value:number, valueAStart:number);
+	public constructor(x:number, y:number, parent:CellNode|null, value:number, valueAStar:number);
 	public constructor(x:number, y:number, parent:CellNode|null, value?:number, valueAStar?:number) {
 		this.x = x;
 		this.y = y;
@@ -136,11 +136,11 @@ export class CellNode {
 
 
 	private computeValueAStar(area: Cell[][], targetX: number, targetY: number, x: number, y: number): number {
-		return this.getDistance(x, y, area) + this.getHeiuristic(targetX, targetY, x, y);
+		return this.getDistance(x, y, area) + this.getHeiuristic(targetX, targetY, x, y) * 20;
 	}
 
 	private getHeiuristic(targetX: number, targetY: number, x: number, y: number) {
-		return Math.sqrt(((targetX - x) * (targetX - x)) + ((targetY - y) * (targetY - y))) * 20;
+		return Math.sqrt(((targetX - x) * (targetX - x)) + ((targetY - y) * (targetY - y)));
 	}
 
 
@@ -148,11 +148,18 @@ export class CellNode {
 		return this.x;
 	}
 
+
 	public getY():number {
 		return this.y;
 	}
 
+
 	public getParent(): CellNode | null {
 		return this.parent;
+	}
+
+
+	public getValueAStar(): number {
+		return this.valueAStar;
 	}
 }
