@@ -1,4 +1,3 @@
-import { Gui } from '~/gui/Gui';
 import {GameStateManager} from './GameStateManager';
 
 export abstract class GameState {
