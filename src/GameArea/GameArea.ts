@@ -1,3 +1,6 @@
+import { CellNode } from "~/Objects/CellNode";
+import { Algorythm } from "../Algorithms/Algorythm";
+import { BFS } from "../Algorithms/BFS";
 import { CellType } from "../enums/CellType";
 import { Cell } from "./Cell";
 
@@ -5,6 +8,10 @@ export class GameArea {
 	private gameArea: Cell[][];
 
 	private currentType = CellType.WALL as CellType;
+
+	private algorithm = null as Algorythm | null;
+
+	private started = false as boolean;
 
 	private width: number;
 
@@ -18,7 +25,10 @@ export class GameArea {
 		}) as EventListener);
 		window.addEventListener('cleararea', (() => {
 			this.clearGameArea();
-			console.log('ff');
+		}) as EventListener);
+		window.addEventListener('startinited', ((e: CustomEvent) => {
+			this.algorithm = new BFS(this.gameArea);
+			this.started = true;
 		}) as EventListener);
 	}
 
@@ -32,6 +42,27 @@ export class GameArea {
 	}
 
 
+	public tick() {
+		if (this.algorithm !== undefined) {
+			if (this.started) {
+				this.algorithm?.tick();
+			}
+		}
+		if (this.algorithm?.foundNode) {
+			const node = this.algorithm?.foundNode;
+			this.gameArea[node.getY()][node.getX()].path = true;
+
+			let parent = node.getParent() as CellNode | null;
+
+			while (parent !== null) {
+				this.gameArea[parent.getY()][parent.getX()].path = true;
+				parent = parent.getParent();
+			}
+			this.clearIntermediate();
+		}
+	}
+
+
 	public mouseOver(event: MouseEvent) {
 		const x = event.offsetX;
 		const y  = event.offsetY;
@@ -40,6 +71,18 @@ export class GameArea {
 
 		if (event.buttons === 1 || event.type === 'click') {
 			this.changeType(indexX, indexY, this.currentType);
+		}
+	}
+
+
+	private clearIntermediate() {
+		for (let i = 0, iLimit = this.gameArea.length; i < iLimit; i++) {
+			for (let x = 0, xLimit = this.gameArea[i].length; x < xLimit; x++) {
+				const cell = this.gameArea[i][x];
+				cell.curr = false;
+				cell.passThrough = false;
+				cell.visited = false;
+			}
 		}
 	}
 
@@ -59,6 +102,13 @@ export class GameArea {
 
 	private clearGameArea():void {
 		this.gameArea = this.initGameArea(this.width);
+		this.algorithm = null;
+		const event = new CustomEvent('areachanged', {
+			detail: {
+				isReady: this.isStartSet() && this.isTargetSet(),
+			}
+		});
+		window.dispatchEvent(event);
 	}
 
 

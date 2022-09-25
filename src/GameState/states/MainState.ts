@@ -13,7 +13,7 @@ export class MainState extends GameState {
 
 
 	public tick(): void {
-
+		this.gameArea.tick();
 	}
 
 

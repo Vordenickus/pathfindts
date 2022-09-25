@@ -28,7 +28,7 @@ export class CellNode {
 		const maxPos = area.length - 1;
 
 		if (this.x > 0) {
-			if (area[this.y][this.x].type !== CellType.WALL) {
+			if (area[this.y][this.x - 1].type !== CellType.WALL) {
 				children.push(new CellNode(this.x - 1, this.y, this));
 			}
 		}
@@ -47,7 +47,7 @@ export class CellNode {
 
 		if (this.y < maxPos) {
 			if (area[this.y + 1][this.x].type !== CellType.WALL) {
-				children.push(new CellNode(this.x, this.y+1, this));
+				children.push(new CellNode(this.x, this.y + 1, this));
 			}
 		}
 
@@ -60,5 +60,9 @@ export class CellNode {
 
 	public getY():number {
 		return this.y;
+	}
+
+	public getParent(): CellNode | null {
+		return this.parent;
 	}
 }

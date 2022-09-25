@@ -3,14 +3,16 @@ import {CellType} from '../enums/CellType'
 export class Cell {
 	private x: number;
 	private y: number;
-	private path = false as boolean;
-	private passThrough = false as boolean;
-	private visited = false as boolean;
 	private static WIDTH = 10 as number;
 	private static HEIGHT = 10 as number;
 	private static BORDER = 1 as number;
 
 	public type: CellType;
+
+	public path = false as boolean;
+	public passThrough = false as boolean;
+	public visited = false as boolean;
+	public curr = false as boolean;
 
 
 	constructor(x: number, y: number, type: CellType) {
@@ -48,18 +50,32 @@ export class Cell {
 				break;
 		}
 
-		if (this.passThrough) {
+		if (this.curr && (this.type !== CellType.START && this.type !== CellType.TARGET)) {
+			color = 'orange';
+		}
+
+		if (this.passThrough && (this.type !== CellType.START && this.type !== CellType.TARGET)) {
 			color = 'aqua';
 		}
 
-		if  (this.visited) {
+		if  (this.visited && (this.type !== CellType.START && this.type !== CellType.TARGET)) {
 			color = 'red';
 		}
 
-		if (this.path) {
+		if (this.path && (this.type !== CellType.START && this.type !== CellType.TARGET)) {
 			color = 'green';
 		}
 
 		return color;
+	}
+
+
+	public getX():number {
+		return this.x / Cell.WIDTH;
+	}
+
+
+	public getY():number {
+		return this.y / Cell.HEIGHT;
 	}
 }
