@@ -1,7 +1,5 @@
 import { CellType } from "../enums/CellType";
 import { Cell } from "./Cell";
-import { Gui } from "../gui/Gui";
-import { TypeEvent } from "../types/types";
 
 export class GameArea {
 	private gameArea: Cell[][];
@@ -40,12 +38,8 @@ export class GameArea {
 		const indexX = Math.floor(x / 10);
 		const indexY = Math.floor(y / 10);
 
-		if (event.type === 'click') {
-			this.gameArea[indexY][indexX].type = this.currentType;
-		}
-
-		if (event.buttons === 1) {
-			this.gameArea[indexY][indexX].type = this.currentType;
+		if (event.buttons === 1 || event.type === 'click') {
+			this.changeType(indexX, indexY, this.currentType);
 		}
 	}
 
@@ -65,5 +59,46 @@ export class GameArea {
 
 	private clearGameArea():void {
 		this.gameArea = this.initGameArea(this.width);
+	}
+
+
+	private changeType(xIndex: number, yIndex: number, type: CellType): void {
+		switch(type) {
+			case CellType.START:
+				if (this.isStartSet()) {
+					return;
+				}
+				break;
+			case CellType.TARGET:
+				if (this.isTargetSet()) {
+					return;
+				}
+				break;
+		}
+		this.gameArea[yIndex][xIndex].type = type;
+	}
+
+
+	private isStartSet():boolean {
+		for (let i = 0, iLimit = this.gameArea.length; i < iLimit; i++) {
+			for (let x = 0, xLimit = this.gameArea[i].length; x < xLimit; x++) {
+				if (this.gameArea[i][x].type === CellType.START) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	private isTargetSet():boolean {
+		for (let i = 0, iLimit = this.gameArea.length; i < iLimit; i++) {
+			for (let x = 0, xLimit = this.gameArea[i].length; x < xLimit; x++) {
+				if (this.gameArea[i][x].type === CellType.TARGET) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
