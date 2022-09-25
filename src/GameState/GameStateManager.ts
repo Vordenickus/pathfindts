@@ -1,5 +1,6 @@
 import { Stack } from "../utils/Stack";
 import { GameState } from "./GameState";
+import { Gui } from "../gui/Gui";
 
 export class GameStateManager {
 	private states: Stack<GameState>;
@@ -25,5 +26,10 @@ export class GameStateManager {
 
 	public keyPressed(event: KeyboardEvent) {
 		this.states.peek().keyPressed(event);
+	}
+
+
+	public mouseOver(event: MouseEvent) {
+		this.states.peek().mouseOver(event);
 	}
 }

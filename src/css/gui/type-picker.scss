@@ -1,0 +1,54 @@
+$block-name: 'b-type-picker';
+
+.#{$block-name} {
+	width: 100%;
+
+	&__title {
+		text-align: center;
+		font-size: 40px;
+	}
+
+	&__grid {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		row-gap: 10px;
+		column-gap: 10px;
+	}
+
+	&__cell {
+		width: 50px;
+		height: 50px;
+		box-sizing: border-box;
+		border-radius: 15px;
+		cursor: pointer;
+
+		&--start {
+			background-color: #ff00ff;
+		}
+
+		&--target {
+			background-color: #ffff00;
+		}
+
+		&--wall {
+			background-color: #fff;
+		}
+
+		&--earth {
+			background-color: #000;
+		}
+
+		&:hover {
+			border: 3px solid blue;
+		}
+
+		&--active {
+			border: 3px solid red;
+
+			&:hover {
+				border: 3px solid red;
+			}
+		}
+	}
+}

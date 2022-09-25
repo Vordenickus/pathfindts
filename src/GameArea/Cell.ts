@@ -22,7 +22,7 @@ export class Cell {
 		const save = cntx.fillStyle!;
 		cntx.fillStyle! = this.calculateColor(this.type);
 		cntx.rect(this.x, this.y, Cell.WIDTH, Cell.HEIGHT);
-		cntx.fillRect(this.x + Cell.BORDER, this.y + Cell.BORDER, Cell.WIDTH - (Cell.BORDER * 2), Cell.HEIGHT - (Cell.BORDER * 2));
+		cntx.fillRect(this.x, this.y, Cell.WIDTH, Cell.HEIGHT);
 
 		cntx.fillStyle! = save;
 	}
@@ -31,9 +31,9 @@ export class Cell {
 	private calculateColor(type: CellType): string {
 		switch(type) {
 			case CellType.START:
-				return 'purple';
+				return '#ff00ff';
 			case CellType.TARGET:
-				return 'yellow';
+				return '#ffff00';
 			case CellType.WALL:
 				return '#fff';
 			case CellType.EARTH:

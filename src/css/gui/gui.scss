@@ -1,0 +1,11 @@
+$block-name: 'b-gui';
+
+.#{$block-name} {
+	display: flex;
+	flex-flow: column nowrap;
+	height: 1000px;
+	width: 300px;
+	row-gap: 40px;
+	padding-left: 50px;
+	padding-right: 50px;
+}

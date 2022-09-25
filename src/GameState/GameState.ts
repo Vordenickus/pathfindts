@@ -1,3 +1,4 @@
+import { Gui } from '~/gui/Gui';
 import {GameStateManager} from './GameStateManager';
 
 export abstract class GameState {
@@ -12,4 +13,5 @@ export abstract class GameState {
 	public abstract tick(): void;
 	public abstract draw(cntx: CanvasRenderingContext2D, canvas: HTMLCanvasElement): void;
 	public abstract keyPressed(event: KeyboardEvent): void;
+	public abstract mouseOver(event: MouseEvent): void;
 }

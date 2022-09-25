@@ -1,6 +1,7 @@
 import { GameState } from "../GameState";
 import { GameStateManager } from "../GameStateManager";
 import { GameArea } from "../../GameArea/GameArea";
+import { Gui } from "~/gui/Gui";
 
 export class TestState extends GameState {
 
@@ -24,5 +25,10 @@ export class TestState extends GameState {
 
 	public keyPressed(event: KeyboardEvent): void {
 
+	}
+
+
+	public mouseOver(event: MouseEvent): void {
+		this.gameArea.mouseOver(event);
 	}
 }

@@ -1,5 +1,6 @@
 import {GameStateManager} from './GameState/GameStateManager';
 import {TestState} from './GameState/states/TestState';
+import { Gui } from './gui/Gui';
 
 export class GameView {
 
@@ -19,6 +20,17 @@ export class GameView {
 		window.addEventListener('keypress', (event) => {
 			this.keyPressed(event);
 		});
+		this.canvas.addEventListener('mousemove', (ev: MouseEvent) => {
+			ev.preventDefault();
+			this.mouseOver(ev);
+		});
+		this.canvas.addEventListener('click', (ev) => {
+			ev.preventDefault();
+			this.mouseOver(ev);
+		});
+		this.canvas.addEventListener('contextmenu', (ev) => {
+			ev.preventDefault();
+		});
 	}
 
 
@@ -37,12 +49,17 @@ export class GameView {
 
 
 	private tick(): void {
-
+		this.gsm.tick();
 	}
 
 
-	private keyPressed(event: KeyboardEvent) {
+	private keyPressed(event: KeyboardEvent): void {
+		this.gsm.keyPressed(event);
+	}
 
+
+	private mouseOver(event: MouseEvent): void {
+		this.gsm.mouseOver(event);
 	}
 
 
@@ -53,9 +70,7 @@ export class GameView {
 	}
 
 
-
 	public clear(): void {
 		this.context?.clearRect(0, 0, this.width, this.height);
 	}
-
 }
