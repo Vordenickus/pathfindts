@@ -6,27 +6,34 @@ export class Gui {
 	private algoButtons: NodeListOf<HTMLDivElement>;
 	private clearButton: HTMLDivElement;
 	private startButton: HTMLDivElement;
+	private stopButton: HTMLDivElement;
 
 	private currAlgorithm = Algorithms.BFS as Algorithms;
+
+	private startActive = false as boolean;
 
 
 	private static TYPE_CLASS = 'b-type-picker__cell';
 	private static ALGO_CLASS = 'b-algorithm-picker__cell';
 	private static CLEAR_CLASS = 'b-clear';
 	private static START_CLASS = 'b-start';
+	private static STOP_CLASS = 'b-stop';
 	private static ACTIVE_TYPE_CLASS = 'b-type-picker__cell--active';
 	private static ACTIVE_ALGO_CLASS = 'b-algorithm-picker__cell--active';
 	private static INACTIVE_START_CLASS = 'b-start--inactive';
+	private static INACTIVE_STOP_CLASS = 'b-stop--inactive';
 
 	public constructor() {
 		this.typeButtons = document.querySelectorAll('.' + Gui.TYPE_CLASS);
 		this.algoButtons = document.querySelectorAll('.' + Gui.ALGO_CLASS);
 		this.clearButton = document.querySelector('.' + Gui.CLEAR_CLASS)!;
 		this.startButton = document.querySelector('.' + Gui.START_CLASS)!;
+		this.stopButton = document.querySelector('.' + Gui.STOP_CLASS)!;
 		this.initTypeListeners();
 		this.initClearListener();
 		this.initAlgoListeners();
 		this.initStartButton();
+		this.initStopButton();
 	}
 
 
@@ -59,7 +66,9 @@ export class Gui {
 		window.addEventListener('areachanged', ((e:CustomEvent) => {
 			if (e.detail.isReady) {
 				this.startButton.classList.remove(Gui.INACTIVE_START_CLASS);
+				this.startActive = true;
 			} else {
+				this.startActive = false;
 				this.startButton.classList.add(Gui.INACTIVE_START_CLASS);
 			}
 		}) as EventListener);
@@ -69,7 +78,24 @@ export class Gui {
 					algorithmName: this.currAlgorithm,
 				}
 			});
-			window.dispatchEvent(event);
+			if (this.startActive) {
+				window.dispatchEvent(event);
+			}
+		});
+	}
+
+
+	private initStopButton():void {
+		window.addEventListener('startinited', () => {
+			this.stopButton.classList.remove(Gui.INACTIVE_STOP_CLASS);
+			console.log(this.stopButton);
+		});
+		this.stopButton.addEventListener('click', ()=>{
+			if (!this.stopButton.classList.contains(Gui.INACTIVE_STOP_CLASS)) {
+				const event = new CustomEvent('pathclear', {});
+				window.dispatchEvent(event);
+				this.stopButton.classList.add(Gui.INACTIVE_STOP_CLASS);
+			}
 		});
 	}
 
@@ -77,7 +103,6 @@ export class Gui {
 	private initClearListener():void {
 		this.clearButton.addEventListener('click', () => {
 			const event = new CustomEvent('cleararea', {
-
 			});
 			window.dispatchEvent(event);
 		});
@@ -117,6 +142,12 @@ export class Gui {
 				return CellType.WALL;
 			case 'tp-start':
 				return CellType.START;
+			case 'tp-sand':
+				return CellType.SAND;
+			case 'tp-water':
+				return CellType.WATER;
+			case 'tp-stone':
+				return CellType.STONE;
 			case 'tp-earth':
 			default:
 				return CellType.EARTH;
