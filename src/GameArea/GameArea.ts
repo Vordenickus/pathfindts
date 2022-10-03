@@ -32,6 +32,11 @@ export class GameArea {
 			this.algorithm = this.pickAlgorythm(e.detail.algorithmName);
 			this.started = true;
 		}) as EventListener);
+		window.addEventListener('pathclear', ((e: CustomEvent) => {
+			this.algorithm = null;
+			this.started = false;
+			this.gameArea = this.clearPathRelated(this.gameArea);
+		}) as EventListener);
 	}
 
 
@@ -111,6 +116,20 @@ export class GameArea {
 			}
 		});
 		window.dispatchEvent(event);
+	}
+
+
+	private clearPathRelated(area: Cell[][]): Cell[][] {
+		for (let i = 0; i < area.length; i++) {
+			for (let x = 0; x < area[i].length; x++) {
+				const cell = area[i][x];
+				cell.curr = false;
+				cell.passThrough = false;
+				cell.path = false;
+				cell.visited = false;
+			}
+		}
+		return area;
 	}
 
 

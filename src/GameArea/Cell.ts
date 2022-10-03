@@ -43,6 +43,15 @@ export class Cell {
 			case CellType.WALL:
 				color = '#fff';
 				break;
+			case CellType.SAND:
+				color = '#8B8000';
+				break;
+			case CellType.STONE:
+				color = '#918E85';
+				break;
+			case CellType.WATER:
+				color = '#d4f1f9';
+				break;
 			case CellType.EARTH:
 			default:
 				color = '#000';
